@@ -1,0 +1,2906 @@
+---
+title: "Descifrando [LaTeX](https://www.latex-project.org/)"
+author: "CRG"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    highlight: zenburn
+    number_sections: yes
+    theme: united
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+    css: estilo.css
+---
+
+
+<center>
+![](/imagenes_latex/imageLaTeX.png)
+</center>
+<br>
+<br>
+<br>
+<br>
+
+
+LaTeX es un sistema de preparación de documentos para la composición de alta calidad. Se utiliza para artículos, trabajos de investigación, documentos científicos y técnicos, presentaciones, textos jurídicos, facturas, libros, informes y casi cualquier forma de publicación.  
+
+
+LaTeX es una buena forma de presentación de texto para la comunicación y publicación de documentos científicos. LaTeX está disponible como [software libre](https://www.gnu.org/philosophy/free-sw.es.html).  
+
+
+> __¡LaTeX no es un procesador de textos!.__
+
+LaTeX alienta a los autores a no preocuparse demasiado por la apariencia de sus documentos, sino a concentrarse en obtener el contenido correcto.
+
+# Características de LaTeX
+
+- Disponible para Windows, Linux, Macintosh, Navegadores, etc.  
+
+- Extremadamente estable, maneja documentos muy grandes y complejos sin problema.  
+
+- Composición tipográfica de artículos de revistas, informes técnicos, libros y presentaciones de diapositivas.  
+- Control sobre documentos grandes que contienen secciones, referencias cruzadas, tablas y figuras.  
+
+- Enumeración automática de capítulos, secciones, figuras, ecuaciones, etc.  
+
+- Generación automática de lista de contenidos, lista de figuras, índice, bibliografía, etc.  
+
+- Composición tipográfica de fórmulas matemáticas complejas.  
+
+- Tipografía avanzada de matemáticas con AMS-LaTeX.  
+
+- Generación automática de bibliografías e índices.   
+
+- Composición tipográfica multilingüe.  
+
+- Gran cantidad de paquetes apra diferentes tipos de documentos.  
+
+- Personalizable con Macros y paquetes.  
+
+# Crear documentos con LaTeX
+
+Para crear y visualizar documentos haciendo uso de LaTeX, son necesarias dos cosas:
+
+* [Distribución TeX](https://www.latex-project.org/get/#tex-distributions)
+
+* Editor LaTeX
+
+A continuación las distribuciones más populares para sistemas operativos Windows:
+
+*  TeX Live
+
+*  MikTex
+
+Algunos de los editores de LaTeX:
+
+* [LyX](https://www.lyx.org/)
+
+* [TexMaker](https://www.xm1math.net/texmaker/)
+
+* [TexStudio](https://www.texstudio.org/)  
+
+Para la ejecución de los ejemplos de esta guía se hará uso del editor TexMaker, el cual permite una ventana de visualización del pdf.
+
+<center>
+![Entorno TexMaker](/texmaker_top_bg.png)[*Entorno TexMaker*](https://www.xm1math.net/texmaker/)
+</center>
+
+# Fundamentos
+
+## Formato de los comandos.
+
+```latex
+\nombredelcomando[Argumento Opcional]{Argumento Obligatorio}
+
+ó
+
+\nombredelcomando{Argumento Obligatorio}[Argumento Opcional]
+```
+
+
+Todos los comandos en LaTeX tienen esta forma. Inician con Backslash `\` seguido por el nombre del comando, argumentos opcionales dentro de corchetes `[]` (si los tiene), y argumentos obligatorios dentro de las llaves `{}` (si los hay).
+
+
+
+Algunos ejemplos:
+
+```latex
+\documentclass{article}  
+\documentclass[11pt]{article}
+\documentclass{article}[11pt]  
+```
+
+
+> Nota: Los comandos son sensibles a las mayúsculas y generalmente no hay espacio en los comandos.  
+
+
+
+## Ambientes en LaTeX
+
+```latex
+\begin{environment}
+...
+...
+\end{environment}
+```  
+
+Con LaTeX, se trabajará en ambientes como estos:  
+
+```latex
+\begin{document}...  end\{document}
+
+\begin{equation}...  end\{equation}
+
+\begin{tabular}...  end\{tabular}
+
+```  
+
+## Un primer ejemplo
+
+Digitar los siguientes comandos en el editor LaTeX para obtener el primer documento.
+
+```latex
+documentclass{article}
+\begin{document}
+Este es el primero de muchos documentos a crear con LaTeX ...
+
+\end{document}
+```
+
+Ejecutando los comandos anteriores se obtiene:  
+
+![](/imagenes_latex/eje1.png)
+
+## Estructura del documento  
+
+```latex
+\documentclass[]{}
+\usepackage[]{}
+\begin{document}
+
+..........
+..........
+
+\end{document}
+```
+
+* El área o espacio entre `\documentclass[]{}` y `\begin{document}` es llamada **preámbulo**. Incluye los paquetes que serán usados y los comandos que afectan todo el documento.
+
+* El contenido del documento se localiza entre `\begin{document}`...`\end{document}`.  
+
+## Clases de documentos y seccionado  
+
+Hay muchas clases de documentos disponibles en LaTeX. Algunas de ellas son las siguientes:  
+
+* `article`: informes cortos, artículos, y documentos de investigación (research papers).  
+
+* `report`: informes extensos, tesis, libros pequeños.  
+
+* `book`: libros.  
+
+* `letter`: para escribir cartas.  
+
+* `beamer`: para presentaciones.  
+
+
+El seccionamiento del documento puede hacerse hasta en siete niveles:
+
+|Parte del contenido|Nivel|
+|:---:|:---:|
+|Parte|-1|
+|Capítulo|0|
+|Sección|1|
+|Subsección|2|
+|Subsección|3|
+|Párrafo|4|
+|Subpárrafo|5|  
+
+
+`\part` y `\chapter` sólo están disponibles para las clases `report` y `book`.
+
+Un documento típico, tipo artículo se vería así:
+
+```latex
+\documentclass{article}
+\begin{document}
+\tableofcontents
+\section{Primera sección}
+\section{Segunda sección}
+\subsection{Subsección de la segunda sección}
+\subsubsection[Nivel inferior]{Subsección en un nivel inferior}
+\section{Tercera sección}
+\subsection{Subsección de la tercera sección}
+\subsection{Otra subsección de la tercera sección}
+\end{document}
+```
+
+Ejecutando el anterior consecutivo de comandos, se obtiene:
+
+![](/imagenes_latex/eje2.png)  
+
+<br>
+<br>
+
+
+
+> Nota: Obtener el título del contenido "Contents", en español.
+
+
+# Salto de línea o nueva línea  
+
+```latex
+\documentclass{article}
+\begin{document}
+\Oración en una línea. Siguiente oración en la misma línea.\\
+Oración en una línea.\\ Siguiente oración en una nueva línea.
+\end{document}
+
+```
+
+El resultado que se obtiene es el siguiente:
+
+![](/imagenes_latex/eje3.png)
+
+<br>
+<br>
+
+Tener presente, que un doble `\\` se usa para saltar a un nuevo renglón o línea.
+
+Un comando alternativo se denota así, `\newline`.
+
+De manera similar, para pasar a una nueva página se usa `\newpage`.
+
+
+# Nuevo párrafo
+
+Para generar un nuevo párrafo, se deja un espacio o renglón en blanco.
+
+```latex
+\documentclass{article}
+\begin{document}
+Estas frases están contenidas en un mismo párrafo, las siguientes oraciones, se escribirán en un párrafo nuevo.
+
+Esta es una nueva frase, en un nuevo párrafo. El nuevo párrafo se genera dejando una línea en blanco.
+\end{document}
+```
+
+Salida del código:  
+
+![](/imagenes_latex/eje4.png)
+<br>
+<br>
+
+
+## *Aclaraciones importantes*
+
+En LaTeX, múltiples espacios equivalen a un espacio sencillo, por ejemplo escribir:
+
+```latex
+Un punto azul pálido
+
+```
+
+y
+
+```latex
+Un       punto            azul           pálido
+```
+
+generan el mismo resultado,
+
+```latex
+Un punto azul pálido
+```
+
+
+De la misma manera, múltiples lineas en blanco, equivalen a dejar una sola línea en blanco.  
+
+```latex
+Primer párrafo.
+
+Segundo párrafo.
+```
+
+y
+
+
+```latex
+Primer párrafo.
+
+
+
+
+
+Segundo párrafo.
+```
+
+Producirań el mismo resultado, el cual será generar un espacio nuevo para un nuevo párrafo.
+
+
+```latex
+Primer párrafo.
+
+Segundo párrafo.
+```
+
+Para agregar espacios adicionales, se debe digitar `"\ "`, backslah y un espacio; esto actúa como la barra espaciadora en LaTeX.
+
+Para adicionar de manera manual líneas o renglones en blanco, basta con digitar dos backslash seguidos `\\`.
+
+```latex
+\documentclass{article}
+\begin{document}
+Un  \ \ punto \ \ \ \ \ \ \ azul \ \ pálido.\\
+\\
+\\
+\\
+\\
+"Consideremos nuevamente este punto..."
+
+\end{document}
+```
+
+![](/imagenes_latex/eje5.png)
+<br>
+<br>
+
+
+
+# Símbolos especiales   
+
+```latex
+\documentclass{article}
+\begin{document}
+
+\# \$ \%
+
+\{ \} \&
+
+\_ \copyright
+
+\textbackslash
+
+\textendash
+
+\textemdash
+
+\textregistered
+
+\texttrademark
+
+\end{document}
+
+```
+
+![](/imagenes_latex/eje6.png)
+<br>
+<br>
+
+
+# [Fuentes tipográficas](https://en.wikibooks.org/wiki/LaTeX/Fonts)
+
+```latex
+\documentclass{article}
+\begin{document}
+\texttt{Typewriter Font}\\ \\
+\textsf{Serif Font}\\  \\
+\textrm{Roman Font}\\ \\
+\end{document}
+
+```
+
+![](/imagenes_latex/eje7.png)
+<br>
+<br>
+
+# Estilos de fuentes
+
+```latex
+\documentclass{article}
+\begin{document}
+\textbf{Bold font}
+
+\textit{Italic font}
+
+\underline{Underlined}
+
+\emph{Emphasized text}
+
+\textsl{Slanted text}
+
+\end{document}
+```
+
+![](/imagenes_latex/eje8.png)
+
+# Tamaño de la fuente
+
+```latex
+\documentclass{article}
+\begin{document}
+
+{\tiny tiny}
+
+{\scriptsize script}
+
+{\footnotesize footnote}
+
+{\small small}
+
+{\large large}
+
+{\huge huge}
+
+{\Huge Huge}
+
+\end{document}
+```
+
+![](/imagenes_latex/eje9.png)
+
+
+# Subíndice y superíndice
+
+```latex
+\documentclass{article}
+\begin{document}
+
+Texto\textsuperscript{superíndice}
+
+Texto\textsubscript{subíndice}
+
+\end{document}
+
+```
+
+![](/imagenes_latex/eje10.png)
+<br>
+<br>
+
+
+# Alineaciones
+
+```latex
+\documentclass{article}
+\begin{document}
+
+
+\begin{flushleft}
+Alineación a la izquierda.
+\end{flushleft}
+
+Alineado normal.
+
+\begin{center}
+Texto centrado.
+\end{center}
+
+\begin{flushright}
+Alineación a la derecha.
+\end{flushright}
+
+\end{document}
+
+```
+
+![](/imagenes_latex/eje11.png)
+<br>
+<br>
+
+Se debe iniciar `\begin{flushleft}` y finalizar `\end{flushleft}`, en este caso para obtener el texto deseado (el cual debe estar entre estas dos líneas de comando) alineado en la parte izquierda del documento.
+
+De la misma forma para centrar un texto se hace uso de las instrucciones `\begin{center}`, `\end{center}` y el texto en medio de estas dos líneas.
+
+Para hacer alineación a la derecha, `\begin{right}` , `end{right}`, son usados; y el texto nuevamente en el medio de las dos líneas de comando.
+
+
+# Adicionar espacio vertical y horizontal.  
+
+Para especificar espacio horizontal, `\hspace`
+
+Adicionar espacio vertical, `\vspace`
+
+```latex
+\documentclass{article}
+\begin{document}
+
+Un espacio horizontal \hspace{10pt} de 10 puntos.\\
+
+Este es un espacio \hspace{2cm} horizontal de 2cm.\\
+
+Un espacio \hspace{20pt }horizontal de 20 puntos.\\
+
+Aća inicia una nueva línea.
+
+\vspace{1cm}
+Este nuevo párrafo tiene un espacio adicional de 1cm.
+
+\vspace{4cm}
+Para este nuevo párrafo el espacio vertical adicional es de 4cm.
+
+
+\end{document}
+```
+
+![](/imagenes_latex/eje12.png)
+
+
+# Comentarios al código
+
+Los comentarios  que se hacen al interior del código en algunos casos tienen el objetivo de hacer alguna aclaración o anotación acerca código escrito. Estas líneas que se agregan al código no són interpretadas por el editor, por lo tanto no aparecen en el documento.
+
+Los comentarios son agregados con el símbolo `%`, pero como se observa, en el resultado no se imprimen.
+
+```latex
+\documentclass{article}
+\begin{document}
+
+Esta línea de texto tiene % este es un comentario
+% Esta es una línea de comentario
+comentarios hechos por el creador del código.
+% Otra linea de comentario
+
+\end{document
+```
+
+![](/imagenes_latex/eje13.png)
+
+<br>
+<br>
+
+Otra manera de hacer comentarios en el código, es haciendo uso del paquete [`verbatim`](https://www.ctan.org/pkg/verbatim). El cual permite hacer varias líneas de comentarios seguidas, las cuales son escritas en el entorno `begin{comment}` y `\end{comment}`.
+
+
+```latex
+\documentclass{article}
+\usepackage{verbatim}
+\begin{document}
+
+Las siguientes líneas hacen parte de los cometarios,
+\begin{comment}
+Esta es una línea de comentario.
+Otra línea para comentar.
+Adicional línea de comentario.
+\end{comment}
+las cuales no se imprimen al ejecutar el código.
+
+\end{document}
+```
+
+![](/imagenes_latex/eje14.png)
+
+
+# Diseño de la página
+
+El código siguiente produce un documento con los parámetros que LaTeX tiene por defecto:
+
+- Paper size: Letter  
+- Font: Computer Modern  
+- Font size: 10pt  
+- Orientation: Portrait  
+- One column
+
+
+```latex
+\documentclass{article}
+\begin{document}
+Documento de ejemplo por defecto.
+\end{document}
+
+```
+
+Este código reproduce un documento con los siguientes parámetros:
+
+Paper size: A4  
+Font: Computer Modern  
+Font size: 12pt  
+Orientation: Landscape  
+One Column
+
+```latex
+\documentclass[12pt]{article}
+\usepackage[a4paper, landscape]{geometry}
+\begin{document}
+Documento de ejemplo con parámetros modificados.
+
+\end{document}
+
+```
+
+
+Se ejecutará el código a continuación para obtener un documento con los parámetros:
+
+Paper size: Legal  
+Font: Computer Modern  
+Font size: 14pt  
+Orientation: Landscape  
+Two Columns
+
+```latex
+\documentclass[14pt, twocolumn]{article}
+\usepackage[legalpaper, landscape]{geometry}
+\begin{document}
+Fragmento tomado del libro: "Un punto azul pálido" de Carl Sagan.
+
+Echemos otro vistazo a ese puntito...
+
+...en el fervor de sus odios.
+
+\newpage
+
+Nuestros posicionamientos...
+
+\end{document}
+```
+
+![](/imagenes_latex/eje15.png)
+
+<br>
+<br>
+Para dar diferentes tamaños de página en LaTeX se tienen los siguientes parámetros:
+
+a0paper, a1paper, ... , a6paper;  
+b0paper, b1paper, ..., b6paper,  
+letterpaper, legalpaper, ...
+
+Algunas clases de documentos:
+
+Article, Letter, Book, Report, Slides, Beamer, etc.
+
+> El paquete `geometry` se usa para seleccionar el tamaño de papel, configurar márgenes, orientación.
+
+
+# Dibujando línea horizontal
+
+El formato del código es el siguiente:
+
+`\rule[raise - height]{width}{thickness}`
+
+Donde,
+
+* `rise height`: especifica que tan alto se eleva la línea (opcional).
+
+* `width`: determina el largo de la regla. (Obligatoria)
+
+* `thickness`: el argumento para el grosor de la línea. (obligatorio).
+
+```latex
+\documentclass{article}
+\begin{document}
+Texto
+\rule{\linewidth}{1pt}
+
+Texto
+\rule{\linewidth}{2pt}
+
+Texto
+\rule{\linewidth}{3pt}
+
+Texto\\
+\rule{\linewidth}{1pt}
+
+Texto\\
+\rule{\linewidth}{2pt}
+
+Texto\\
+\rule{\linewidth}{3pt}
+\end{document}
+
+```
+
+![](/imagenes_latex/eje16.png)
+
+# Dando color al texto
+
+El paquete `color` es el paquete usado para generar un texto con color.
+
+El formato del comando para dar color al texto es el siguiente:
+
+`\color{nombre del color}{texto a dar color}`
+
+
+```latex
+\documentclass{article}
+\usepackage{color}
+\begin{document}
+\color{red}{texto de color rojo}\\
+\color{blue}{texto de color azul}\\
+\color{green}{texto de color verde}\\
+\color{cyan}{texto de color cyan}\\
+\color{blue}{Este texto}, \color{red}{tiene} \color{yellow}{varios} \color{green}{colores}
+
+\end{document}
+```
+![](/imagenes_latex/eje18.png)
+
+
+<br>
+
+El paquete `color` también permite dar color al fondo de la página con el comando: `\pagecolor{color}`.
+
+```latex
+\documentclass{article}
+\usepackage{color}
+\begin{document}
+\color{red}{texto de color rojo}\\
+\color{blue}{texto de color azul}\\
+\color{green}{texto de color verde}\\
+\color{cyan}{texto de color cyan}\\
+\color{blue}{Este texto}, \color{red}{tiene} \color{yellow}{varios} \color{green}{colores}
+\pagecolor{black}
+
+\end{document}
+```
+
+![](/imagenes_latex/eje17.png)
+
+
+# Viñetas y enumeración
+
+Viñeta sencilla
+
+```latex
+\documentclass{article}
+\begin{document}
+\begin{itemize}
+\item Primera viñeta
+\item Segunda viñeta
+\item Tercera viñeta
+\end{itemize}
+
+\begin{enumerate}
+\item Cuásar o quasar
+\item Magnetar
+\item Blazar
+\end{enumerate}
+\end{document}
+
+```
+
+![](/imagenes_latex/eje19_20.png)
+<br>
+<br>
+
+
+Viñetas con el paquete [`enumitem`](https://www.ctan.org/pkg/enumitem), el cual genera viñetas con diferentes caracteres, como letras, números romanos, etc.
+
+* _Letras minúsculas_: `\begin{enumerate}[label=\alph*.]`
+
+* _Númeración romana_: `\begin{enumerate}[label=\roman*.]`
+
+* _Letras mayusculas_: `\begin{enumerate}[label=\Alph*)]`
+
+
+```latex
+\documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+%letras minúscula
+\begin{enumerate}[label=\alph*.]
+\item Atmósfera
+\item Biósfera
+\item Hidrósfera
+\end{enumerate}
+%secuencia romana
+\begin{enumerate}[label=\roman*.]
+\item Cuerpo celular
+\item Dentritas
+\item Axón
+\end{enumerate}
+%letras mayúsculas
+\begin{enumerate}[label=\Alph*)]
+\item Armenia
+\item Nauru
+\item Seychelles
+\end{enumerate}
+\end{document}
+```
+![](/imagenes_latex/eje21_22_23.png)
+
+<br>
+<br>
+
+
+Para obtener listas sin etiquetas : `\begin{enumerate}[label={}]`
+
+```latex
+\documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+\begin{enumerate}[label={}]
+
+\item Fresa
+\item Melón
+\item Kiwi
+
+\end{enumerate}
+
+\end{document}
+```
+
+![](/imagenes_latex/eje24.png)
+<br>
+
+Otros parámetros para el etiquetado de las viñetas:
+
+Iniciar el etiquetado en un punto de enumeración deseado.
+
+```latex
+\documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+
+\begin{enumerate}[label=\Roman*. , start=3]
+
+\item Voltaje
+\item Resistencia
+\item Corriente
+
+\end{enumerate}
+\end{document}
+```
+
+<br>
+
+![](/imagenes_latex/eje25.png)
+<br>
+
+Uso del paquete `paralist` para generar listados de manera horizontal.
+
+```latex
+\documentclass{article}
+\usepackage{paralist}
+
+\begin{document}
+
+\begin{inparaenum}
+\item Hockey hierba\hspace{10pt}
+\item Pentatlón moderno\hspace{10pt}
+\item Vela\hspace{10pt}
+
+
+\end{inparaenum}
+
+\begin{inparaenum}[a)]
+\item Corriente\hspace{10pt}
+\item Voltaje\hspace{10pt}
+\item Resistencia\hspace{10pt}
+\end{inparaenum}
+
+\end{document}
+
+```
+![](/imagenes_latex/eje26_27.png)
+<br>
+<br>
+
+```latex
+\documentclass{article}
+\begin{document}
+
+\begin{itemize}
+\item Lírico
+
+\begin{itemize}
+\item égogla
+\item oda
+\end{itemize}
+
+\item Narrativo
+\item Dramático
+\begin{itemize}
+
+\item Géneros mayores
+\item Géneror menores
+\end{itemize}
+
+\item Épica
+\end{itemize}
+\end{document}
+
+```
+
+![](/imagenes_latex/eje28.png)
+<br>
+
+> NOTA: el paquete [`enumitem`](https://www.ctan.org/pkg/enumitem) se usa para etiquetas y enumeración.
+
+> NOTA: EL paquete [`paralist`](https://ctan.org/pkg/paralist) es usado para etiquetas y enumeración dentro de un párrafo.
+
+
+# Lista de teoremas, definiciones, ejemplos...
+
+Para hacer una lista de definiciones, ejemplos, teoremas, etc, es conveniente hacer uso del comando:  
+
+`\begin{description}` ... `\end{description}`
+
+```latex
+\documentclass{article}
+\begin{document}
+\begin{description}
+
+\item[I Def\/inición:] def\/inición ...
+\item[II Algoritmo:] es un conjunto de instrucciones o reglas definidas y no-ambiguas, ordenadas y finitas que permite, típicamente, solucionar un problema, realizar un cómputo, procesar datos y llevar a cabo otras tareas o actividades.[Wikipedia, febrero 2020]
+\item[III Diagrama de flujo:]Los diagramas de flujo son descripciones gráficas de algoritmos; usan símbolos conectados con flechas para indicar la secuencia de instrucciones y están regidos por ISO.[Wikipedia, febrero 2020]
+
+\end{description}
+
+\end{document}
+```
+
+![](/imagenes_latex/eje29.png)
+
+
+Para hacer una descripción al interior de un párrafo, se usa el paquete `paralist`, y el comando `\begin{description}` `\end{description}`.
+
+
+```latex
+\documentclass{article}
+\usepackage{paralist}
+\begin{document}
+
+\begin{inparadesc}
+\item[I Def\/inición:] def\/inición acerca de...
+\item[II Def\/inición:] def\/inición acerca de...
+\item[III Def\/inición:] def\/inición acerca de...
+\end{inparadesc}
+
+\end{document}
+```
+<br>
+
+![](/imagenes_latex/eje30.png)
+
+> NOTA: para tener un espaciado correcto entre la letra `f` y la letra `i`, se hace uso de los caracteres especiales `\/` , en el espacio entre las dos letras. En el caso de la palabra definición, en LaTeX se debe escribir `def\/inición`.
+
+<br>
+
+
+# Enumeración de teoremas, definiciones, ejemplos, etc.
+
+Uso del paquete [`amsmath`](https://www.ctan.org/pkg/amsmath).
+
+El formato del comando es el siguiente:
+
+`\newtheorem{nickname of environment}{name of environment as to be printed}[within]`
+
+otra forma,
+
+`\newtheorem{nickname of environment}[numbered like]{name of environment as to be printed}`
+
+
+* `nickname of environment`: etiqueta del entorno dada por el usuario.
+
+* `name of environment as to be printed`: texto del ambiente que saldrá en el documento.
+
+
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\newtheorem{thmv}{Theorem}
+\newtheorem{dfnb}{Definition}
+\newtheorem{lem}{Lemma}
+
+\begin{thmv}
+This is a theorem.
+\end{thmv}
+\begin{thmv}
+This is another theorem.
+\end{thmv}
+
+\begin{dfnb}
+This is a definition.
+\end{dfnb}
+
+\begin{dfnb}
+This is another definition.
+\end{dfnb
+
+\begin{lem}
+This is a lemma.
+\end{lem}
+\end{document}
+
+```
+
+![](/imagenes_latex/eje31.png)
+
+* `within`: el nombre de un contador ya definido generalmente de una sección. Por ejemplo,
+
+`newtheorem{thmv}{Theorem}[section]`,
+
+antepone un número de sección a un número de teorema.
+
+* `numbered like`: el nombre de un teorema ya definido, como ambiente (environment). Por ejemplo,
+
+`\newtheorem{thmv}{Theorem}[section]`
+
+
+`\newtheorem{dfnb}[thmv]{Definition}`
+
+Aquí se utiliza un contador del entorno del teorema (junto con su formato) para numerar las definiciones. Es útil cuando no se requiere una numeración separada para los teoremas, definiciones, ejemplos, etc. especialmente dentro de una sección.
+
+
+# Tabulado en LaTeX
+
+* `\=` utilizar para establecer posiciones de tabulación.
+
+* `\>` use para moverse a las posiciones de tabulación.
+
+```latex
+\documentclass{article}
+\begin{document}
+\begin{tabbing}
+row1col1 \= row1col2 ...  \\
+row2col1 \> row2col2 ...  \\
+...
+
+\end{tabbing}
+
+
+\begin{tabbing}
+\= Tab1 \= Tab2 \= Tab3 \= Tab4\\
+\> Tab1 \\
+\> \> Tab2 \\
+\> \> \> Tab3 \\
+\> \> \> \> Tab4 \\
+
+\end{tabbing}
+\begin{tabbing}
+\= 11 \= 12 \= 13 \= 14 \\
+\> 21 \> 22 \> 23 \> 24 \\
+\> 31 \> 32 \> 33 \> 34 \\
+\> 41 \> 42 \> 43 \> 44 \\
+
+\end{tabbing}
+\end{document}
+```
+
+![](/imagenes_latex/eje32_33.png)
+<br>
+
+# URLs, hipervínculos y marcadores.
+
+## [`url`](https://www.ctan.org/pkg/url)
+
+El formato del comando es: `\url{link-address}`; lo que genera un vínculo que lleva a la web descrita.
+
+## [`hyperref`](https://ctan.org/pkg/hyperref)
+
+El paquete `hyperref` crea marcadores automáticos e hipervínculos. Además cuenta con argumentos adicionales para modificar la apariencia de los mismos.
+
+
+```latex
+\documentclass[a4paper, 12pt]{article}
+\usepackage{url, hyperref}
+\begin{document}
+\section{First Section}
+\href{https://www.ctan.org/pkg/url}{}texto del vínculo (link)\\
+\section{Second Section}
+\url{https://www.ctan.org/pkg/url}\\
+\subsection{A subsection}
+\nolinkurl{https://www.ctan.org/pkg/url}
+\end{document}
+
+```
+
+<br>
+![](/imagenes_latex/eje34.png)
+<br>
+<br>
+
+![](/imagenes_latex/eje34_a.png)
+<br>
+<br>
+```latex
+\documentclass[a4paper, 12pt]{article}
+\usepackage{url}
+\usepackage[colorlinks=true]{hyperref} %agrega un color al vínculo
+\begin{document}
+\section{First Section}
+\href{www.paginaweb.com}{texto del vínculo (link)}\\
+\section{Second Section}
+\url{www.paginaweb.com}\\
+\subsection{A subsection}
+\nolinkurl{www.paginaweb.com}
+\end{document}
+```
+<br>
+<br>
+
+# Encabezado y pié de página
+
+El paquete [`fancyhdr`](https://ctan.org/pkg/fancyhdr) permite el uso de pié de página y encabezados, útiles para documentos como artículos, exámenes, libros, etc.
+
+* `\chead{Página \thepage}`, reproduce el número de página en la parte superior (centro) de la página.
+
+* `\cfoot{Página \thepage}`, reproduce el número de página en la parte inferior (centro) de la página.
+
+De la misma forma, el uso del atributo `\thepage`, genera el número de página para las esquinas superiores e inferiores.
+
+
+
+```latex
+\documentclass{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{C.Izquierdo}
+\chead{C.Central}
+\rhead{C.Derecho}
+\lfoot{P.Izquierdo}
+\cfoot{Página \thepage}
+\rfoot{P.Derecho}
+\begin{document}
+
+Cuerpo del documento.
+\end{document}
+```
+![](/imagenes_latex/eje35.png)
+
+<br>
+<br>
+
+```latex
+\documentclass{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{C.Izquierdo}
+\chead{C.Central}
+\rhead{Página \thepage}
+\lfoot{P.Izquierdo}
+\cfoot{P. Central}
+\rfoot{P.Derecho}
+\renewcommand{\footrulewidth}{0.5pt}
+\begin{document}
+
+Cuerpo del documento.
+
+\end{document}
+```
+
+`\renewcommand{\headrulewidth}{0pt}`, remueve línea después del encabezado con el parámetro`{0pt}`.Si se desea agregar línea después del encabezado, basta con cambiar el valor por `{0.2pt}`, `{0.4pt}`... dependerá del grosor de la línea que se desee.
+
+Para agregar línea o removerla, en el fondo de la página justo por encima del pié de página basta con el comando, `\renewcommand{\footrulewidth}{0.4pt}`. `{0.2}`, `{0.3}`...
+
+<br>
+<br>
+
+![](/imagenes_latex/eje36.png)
+
+
+## Editando encabezados y piés de página para diferentes páginas.
+
+El resultado que se obtiene con los siguientes comandos es el siguiente, una página que contiene encabezados y pié de página, y una segunda página que no contiene ninguno de las dos características.
+
+El comando `\thispagestyle{empty}` remueve encabezado y pié de página en la segunda hoja.
+
+```latex
+\documentclass{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1pt}
+\lhead{C.Izquierdo}
+\chead{C.Central}
+\rhead{C.Derecho}
+\lfoot{P.Izquierdo}
+\cfoot{Página \thepage}
+\rfoot{P.Derecho}
+\begin{document}
+
+Esta página contiene encabezado y pié de página.
+
+\newpage
+\thispagestyle{empty}
+
+Esta página no contiene encabezado ni píe de página
+\end{document}
+
+```
+
+![](/imagenes_latex/eje36_a.png)
+<br>
+<br>
+
+Para definir un nuevo estilo de encabezado y pié de página se usa el comando, `\fancypagestyle{mystyle}`.
+
+Para reinicar los encabezados y los pié de página se usa, `\fancyhf{}`.
+
+El nuevo estilo de encabezado y pié de página es aplicado con el comando, `\thispagestyle{mystyle}`.
+
+
+```latex
+\documentclass{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.4pt}
+\lhead{lh}
+\chead{ch}
+\rhead{rh}
+\lfoot{lf}
+\cfoot{Página \thepage}
+\rfoot{rf}
+\fancypagestyle{mystyle}
+{\fancyhf{}
+\fancyhead[L]{Lh}
+\fancyhead[C]{Ch}
+\fancyhead[R]{Rh}
+\fancyfoot[L]{Lf}
+\fancyfoot[C]{Cf}
+\fancyfoot[R]{Rf}}
+
+\begin{document}
+
+Primera página con encabezado y pié de página.
+
+\newpage
+\thispagestyle{mystyle}
+
+Segunda página con nuevo encabezado y pié de página.
+
+\end{document}
+```
+![](/imagenes_latex/eje36_b.png)
+<br>
+<br>
+
+# Tablas
+
+El entorno o ambiente para crear tablas:
+
+`\begin{tabular}`  
+`\end{tabular}`
+
+
+Con el paquete [`array`](https://ctan.org/pkg/array) se pueden agregar algunos detalles a las tablas; y para obtener unas tablas con más detalles estéticos, el paquete [`booktabs`](https://ctan.org/pkg/booktabs) es el indicado.
+
+
+
+```latex
+\documentclass{article}
+\begin{document}
+
+\textbf{Tabla con texto centrado}\\
+
+\begin{tabular}{ccc}
+\hline
+Col. 1 & Col. 2 & Col. 3\\
+\hline
+11 & 12 & 13 \\
+\hline
+21 & 22 & 23 \\
+\hline
+31 & 32 & 33 \\
+\hline
+\end{tabular}
+\end{document}
+```
+<br>
+![](/imagenes_latex/eje37i.png)
+
+
+* `\begin{tabular}{ccc}`, el parámetro `{ccc}` produce la alineación del texto dentro de la tabla, `c` para centrar el texto, `l` para alinear a la izquierda, `r` para alinear a la derecha.
+
+* Para separar las entradas en cada fila se usa `&`.
+
+* Para finalizar la fila se digita `\\`
+
+* `\hline` se usa para dibujar línea horizontal.  
+
+* Ajustar el ancho de las celdas, `\begin{tabular}{|p{1.5cm}|p{1.5cm}|p{1.5cm}|}`.
+
+```latex
+\documentclass{article}
+\begin{document}
+
+\textbf{Ajusar el ancho de las celdas}\\
+
+\begin{tabular}{p{1.5cm}p{1.5cm}p{1.5cm}} %fijando el ancho
+\hline
+Col. 1 & Col. 2 & Col. 3\\
+\hline
+11 & 12 & 13 \\
+\hline
+21 & 22 & 23 \\
+\hline
+31 & 32 & 33 \\
+\hline
+\end{tabular}
+\end{document}
+```
+![](/imagenes_latex/eje37ii.png)
+
+Insertar las líneas verticales que dividen las columnas.
+
+```latex
+\documentclass{article}
+\begin{document}
+
+\textbf{Tabla con líneas verticales}\\
+
+\begin{tabular}{|c|c|c|} % para agregar linea vertical
+\hline
+Col. 1 & Col. 2 & Col. 3\\
+\hline
+11 & 12 & 13 \\
+\hline
+21 & 22 & 23 \\
+\hline
+31 & 32 & 33 \\
+\hline
+\end{tabular}
+
+
+\end{document}
+
+
+\end{document}
+```
+<br>
+
+![](/imagenes_latex/eje37.png)
+<br>
+
+
+
+## Alinear texto entre las celdas
+
+El paquete `array` permite ubicar el texto dentro de la celda.
+
+```latex
+\documentclass{article}
+\usepackage{array}
+\begin{document}
+
+\textbf{Alinear celdas}\\
+
+\begin{tabular}{|b{1.6cm}|m{1.6cm}|p{1.6cm}|}
+\hline
+Alineado arriba & alineado medio & alineado abajo\\
+\hline
+\end{tabular}
+\end{document}
+```
+<br>
+<br>
+![](/imagenes_latex/eje38.png)
+
+## Altura de la fila
+
+Para modificar la altura de la fila se usa `\setlength` del paquete `array`.
+
+```latex
+\documentclass{article}
+\usepackage{array}
+\begin{document}
+
+\setlength{\extrarowheight}{4pt}
+\begin{tabular}{|c|c|c|}
+\hline
+11 & 12 & 13\\
+\hline
+21 & 22 & 23\\
+\hline
+\end{tabular}\\
+
+\setlength{\extrarowheight}{8pt}
+\begin{tabular}{|c|c|c|}
+\hline
+11 & 12 & 13\\
+\hline
+21 & 22 & 23\\
+\hline
+\end{tabular}\\
+
+\setlength{\extrarowheight}{16pt}
+\begin{tabular}{|c|c|c|}
+\hline
+11 & 12 & 13\\
+\hline
+21 & 22 & 23\\
+\hline
+\end{tabular}
+
+\end{document}
+```
+<br>
+
+![](/imagenes_latex/eje39.png)
+
+
+## Edición de tablas con [`booktabs`](https://ctan.org/pkg/booktabs)
+
+```latex
+\documentclass{article}
+\usepackage{booktabs}
+\begin{document}
+
+\begin{tabular}{ccc}
+\toprule[1.5pt]
+A & B & C \\
+\midrule
+11 & 12 & 13 \\
+21 & 22 & 23 \\
+31 & 32 & 33 \\
+
+\bottomrule[1.5pt]
+\end{tabular}
+\end{document}
+```
+
+![](/imagenes_latex/eje40.png)
+<br>
+<br>
+
+## Fusionando celdas por fila
+
+El formato del comando `\multicolumn{cols}{pos}{text}`, para unir filas es el siguiente:
+
+`multicolumn{cols}{pos}{texto}`
+
+* `cols`, número de columnas que se unirán.
+
+* `pos`, especifica alineación, `c` para centro, `l`, para izquierda, `r` para derecha.
+
+* `text`, el texto que contiene la celda.
+
+> Nota: de manera similar, existe un paquete llamado `multirow` para unir celdas por columna.
+
+```latex
+\documentclass{article}
+\begin{document}
+
+\begin{tabular}{ccc}
+\hline
+\multicolumn{2}{c}{Columna combinada}&
+\multicolumn{1}{c}{Última columna}\\
+\cline{1-2}
+11 & 12 & 13\\
+21 & 22 & 23\\
+31 & 32 & 33\\
+\hline
+\end{tabular}
+\end{document}
+```
+* `\cline` es usado para dibujar una línea horizontal desde la primera columna hasta la segunda columna, justo debajo de la primera fila.
+
+![](/imagenes_latex/eje41.png)
+
+<br>
+<br>
+
+Otro ejemplo de tabla
+
+```latex
+\documentclass{article}
+\usepackage{booktabs}
+\begin{document}
+
+\begin{tabular}{ccc}
+\toprule[1.5pt]
+\multicolumn{2}{l}{Columna combinada}&
+\multicolumn{1}{l}{Última columna}\\
+A & B & C\\
+\cmidrule(r){1-2}\cmidrule(l){3-3}
+11 & 12 & 13\\
+21 & 22 & 23\\
+31 & 32 & 33\\
+\bottomrule[1.5pt]
+\end{tabular}
+\end{document}
+```
+
+![](/imagenes_latex/eje42.png)
+
+<br>
+<br>
+
+## Nombrando las tablas
+
+Título debajo de la tabla
+
+```latex
+\documentclass{article}
+\begin{document}
+\begin{table}[htpb]
+\begin{tabular}{ccc}
+\hline
+Col. 1 & Col. 2 & Col. 3 \\
+\hline
+11 & 12 & 13\\
+\hline
+21 & 22 & 23\\
+\hline
+31 & 32 & 33\\
+\hline
+\end{tabular}
+\centering
+\caption{Título abajo}
+\end{table}
+\end{document}
+```
+![](/imagenes_latex/eje43.png)
+<br>
+<br>
+
+## Título sobre la tabla.
+
+```latex
+\documentclass{article}
+\begin{document}
+\begin{table}[htpb]
+\centering
+\caption{Título arriba}
+\vspace{10pt}
+\begin{tabular}{ccc}
+\hline
+Col. 1 & Col. 2 & Col. 3 \\
+\hline
+11 & 12 & 13\\
+\hline
+21 & 22 & 23\\
+\hline
+31 & 32 & 33\\
+\hline
+\end{tabular}
+\end{table}
+\end{document}
+```
+
+![](/imagenes_latex/eje44.png)
+<br>
+<br>
+<br>
+
+
+> Usar el entorno `tabular` en el ambiente `table`. Para dar nombre a la tabla usar `\caption` antes  o después del entorno `tabular`.
+
+## Dando color a las tablas
+
+Dar color por filas.
+
+```latex
+\documentclass{article}
+\usepackage{colortbl}
+\begin{document}
+\begin{tabular}{ccc}
+\hline
+\rowcolor{red}
+11 & 12 & 13 \\
+\hline
+\rowcolor{green}
+21 & 22 & 23 \\
+\hline
+\rowcolor{blue}
+31 & 32 & 33 \\
+\hline
+\end{tabular}
+\end{document}
+```
+![](/imagenes_latex/eje44a.png)
+
+<br>
+<br>
+
+Dar color por columnas.
+
+```latex
+\documentclass{article}
+\usepackage{colortbl}
+\begin{document}
+\begin{tabular}
+{>{\columncolor{red}}c>{\columncolor{blue}}c>{\color{yellow}\columncolor{green}}c}
+\hline
+11 & 12 & 13 \\
+\hline
+21 & 22 & 23 \\
+\hline
+31 & 32 & 33 \\
+\hline
+\end{tabular}
+\end{document}
+```
+![](/imagenes_latex/eje44b.png)
+<rb>
+<br>
+
+
+# Incluir imágenes
+
+El paquete `graphicx` permite incluir imágenes en el documento.
+
+
+* `width=0.3`, para este caso, el espacio de la imagen tendrá un 30% del ancho del total de la página. Otros valores posibles para este argumento pueden ser `0.1`, `0.4`, `1`, etc.
+
+* `\fbox`, genera un marco para al la imagen.
+
+* `angle=0`, rota la imagen según el ángulo (en grados) deseado. 0°, 15°, 30°...
+
+```latex
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+
+\begin{figure}[htbp]
+
+\includegraphics[width=0.3\textwidth, angle=0]{/imagenes_latex/snowm.jpg}
+\caption{Laderas blancas}
+\end{figure}
+\end{document}
+```
+<br>
+<br>
+![](/imagenes_latex/eje45.png)
+
+<br>
+<br>
+
+```latex
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+
+\begin{figure}[htbp]
+
+\includegraphics[width=1\textwidth, angle=0]{/imagenes_latex/snowm.jpg}
+\caption{Laderas blancas}
+\end{figure}
+\end{document}
+```
+![](/imagenes_latex/eje45a.png)
+
+```latex
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+
+\begin{figure}[htbp]
+\begin{center}
+\fbox{\includegraphics[width=5cm, angle=30]{/imagenes_latex/snowm.jpg}}
+\caption{Laderas blancas}
+\end{center}
+\end{figure}
+\end{document}
+```
+<br>
+<br>
+![](/imagenes_latex/eje46.png)
+
+
+# Entorno matemático en LaTeX
+
+LaTeX funciona de manera correcta para crear ecuaciones químicas, diagramas de circuitos, diagramas de flujo, y por supuesto ecuaciones matemáticas.
+
+## Entornos
+
+Introducir ecuaciones en una línea de texto:
+
+* `\(...\)`
+
+* `$...$`
+
+
+Crear entorno matemático en una nueva línea:
+
+* `\[... \]`
+
+* `$... $`
+
+Crear un entorno matemático en una nueva línea, enumerando las ecuaciones:
+
+* `\begin{equation}...\end{equation}`
+
+```latex
+\documentclass{article}
+\begin{document}
+\(a + b = c\)
+and \(x + y = z\)
+
+\end{document}
+```
+<br>
+<br>
+![](/imagenes_latex/eje47.png)
+<br>
+<br>
+
+```latex
+\documentclass{article}
+\begin{document}
+\[a + b = c\]
+and \[x + y = z\]
+
+\end{document}
+```
+![](/imagenes_latex/eje48.png)
+
+<br>
+<br>
+
+```latex
+\documentclass{article}
+\begin{document}
+
+\begin{equation}
+a + b = c
+\end{equation}
+
+\begin{equation}
+d + e = f
+\end{equation}
+
+\end{document}
+```
+
+![](/imagenes_latex/eje49.png)
+
+
+## Alineación de ecuaciones
+
+Paquete [`amsmath`](https://www.ctan.org/pkg/amsmath).
+
+La alineación de ecuaciones se consigue con este paquete.
+
+Para digitar ecuaciones que son tan largas como un renglón completo, es necesario hacer uso del comando `multiline`.
+
+`align` es usado para alinear verticalmente las ecuaciones.
+
+Haga uso del caracter `*` para obtener ecuaciones sin numeración.
+
+`\begin{equation*}`
+`\begin{multiline*}`
+`\begin{gather*}`
+`\begin{align*}`
+`\nonumber`
+
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\begin{multline}
+x = a + b + c + d + e+ \\
+f + g + h + i + j+ \\
+k + l + m + n
+\end{multline}
+\end{document}
+```
+![](/imagenes_latex/eje50.png)
+
+
+
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\begin{align}
+x + y + z = 1\\
+y + z = 0\\
+u + v + w + z = 2
+\end{align}
+\end{document}
+
+```
+
+![](/imagenes_latex/eje51.png)
+
+<br>
+<br>
+
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\begin{equation}
+\begin{split}
+a = b\\
+=c\\
+\end{split}
+\end{equation}
+\end{document}
+```
+
+![](/imagenes_latex/eje52.png)
+
+
+
+
+## Potencias, raíces y freacciones.
+
+```latex
+\documentclass{article}
+\begin{document}
+\[x, y , z\]
+\[u_1 , d_2\]
+\[j^3 , l^4\]
+\[w_4^6 , q_3^1\]
+\[\sqrt{x}\]
+\[\sqrt[3]{x}\]
+\[\sqrt{\sqrt{x}}\]
+\[\sqrt[n]{y_2^3}\]
+\[\frac{n}{p}\]
+\end{document}
+
+```
+<br>
+<br>
+![](/imagenes_latex/eje53.png)
+<br>
+<br>
+
+## Letras griegas
+
+```latex
+\documentclass{article}
+\begin{document}
+\[\alpha, \beta\]
+\[\gamma, \delta\]
+\[\rho, \lambda\]
+\[\Delta , \nabla\]
+\[\epsilon, \theta\]
+\[\eta, \tau\]
+\[\pi, \sigma\]
+\[\phi, \xi\]
+\end{document}
+```
+
+![](/imagenes_latex/eje54.png)
+
+
+## Conjuntos comunes
+
+<!---problemas con el paquete bbm --->
+
+```latex
+\documentclass{article}
+\usepackage{bbm} %problemas con el paquete bbm
+\begin{document}
+\[\mathbbm{C,Z}\]
+\[\mathbbm{Q,R}\]
+\[\mathbbm{N,Z_+}\]
+\[\mathbbm{R^+,R^-}\]
+\[\mathcal{P,T}\]
+\end{document}
+```
+<br>
+
+![](/imagenes_latex/eje55.png)
+
+<br>
+<br>
+
+
+## Símbolos y operadores
+
+```latex
+\documentclass{article}
+\begin{document}
+\[\infty\]
+\[\leq, \geq\]
+\[\neq, \ll\]
+\[\gg \]
+\[ \prec, \preceq\]
+\[ \succ, \succeq\]
+\[\forall, \exists\]
+\[\not\exists, \iff\]
+\[\sim, \cong\]
+\[\simeq, \approx\]
+\[\equiv\]
+\[\perp, \parallel\]
+\[\propto, \not\perp\]
+\[\wedge, \vee\]
+\[\angle, \mid\]
+\[\bigwedge, \bigvee\]
+\[\pm, \times, \ast\]
+\[\oplus, \ominus\]
+\[\oslash, \odot\]
+\[\otimes\]
+\[\bigoplus, \bigotimes\]
+\[\bigodot\]
+\[\triangle, \triangleleft\]
+\[\triangleright\]
+\[\bigtriangleup\]
+\[\bigtriangledown\]
+\[\circ, \bigcirc\]
+\end{document}
+```
+<center>
+![](/imagenes_latex/eje56.png)
+</center>
+<br>
+
+## Conjuntos y sus operadores
+
+```latex
+\documentclass{article}
+\begin{document}
+\[\in, \ni\]
+\[\setminus\]
+\[\subset, \supset\]
+\[\subseteq\]
+\[\supseteq\]
+\[\cup, \cap\]
+\[\bigcup, \bigcap\]
+\[\sqcup, \sqcap\]
+\[\bigsqcup\]
+\end{document}
+```
+
+<center>
+![](/imagenes_latex/eje57.png)
+</center>
+
+## Algunos operadores con el paquete AMS
+
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\begin{document}
+\[\tehrefore\]
+\[\because\]
+\[\implies\]
+\[\nless, \ngtr\]
+\[\nleq, \ngeq\]
+\[\nsubseteq\]
+\[\nsupseteq\]
+\[\subsetneq\]
+\[\supsetneq\]
+\[\nsubseteq\]
+\[\nsupseteq\]
+\[\subsetneq\]
+\[\supsetneq\]
+\[\nmid\]
+\[\nparallel\]
+\[\nsim\]
+\[\ncong\]
+\end{document}
+```
+<br>
+
+
+<center>
+![](/imagenes_latex/eje58.png)
+</center>
+
+## Símbolos de negación (`amsmath` - `centernot`)
+
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{centernot}
+\begin{document}
+\[\centernot\implies\]
+\[\centernot\iff\]
+\[\centernot\mid\]
+\[\centernot\perp\]
+\[\centernot\equiv\]
+\[\centernot\parallel\]
+\[\centernot\sim\]
+\[\centernot\cong\]
+\end{document}
+```
+
+![](/imagenes_latex/eje59.png)
+
+<br>
+
+## Signos de puntuación doble
+
+```latex
+\documentclass{article}
+\begin{document}
+% paréntesis
+\[ \Biggl( \biggl( \Bigl( \bigl( (\]
+\[) \bigr) \Bigr) \biggr) \Biggr) \]
+% corchetes
+\[ \Biggl[ \biggl[ \Bigl[ \bigl[ [\]
+\[] \bigr] \Bigr] \biggr] \Biggr] \]
+% barras
+\[ \Biggl| \biggl| \Bigl| \bigl| |\]
+\[| \bigr| \Bigr| \biggr| \Biggr| \]
+
+\end{document}
+```
+
+<center>
+![](/imagenes_latex/eje60.png)
+</center>
+
+## Funciones comunes
+
+```latex
+\documentclass{article}
+\begin{document}
+\[\sin, \cos\]
+\[\tan, \cot\]
+\[\sec, \csc\]
+\[\arcsin\]
+\[\arccos\]
+\[\arctan\]
+\[\sinh\]
+\[\cosh\]
+\[\tanh\]
+\[\log, \ln\]
+\[\exp\]
+\[\max, \min\]
+\[\inf, \sup\]
+\[a \equiv r(\bmod\; n)\]
+\end{document}
+```
+
+![](/imagenes_latex/eje61.png)
+<br>
+<br>
+
+
+## Ejemplos de funciones
+
+```latex
+\documentclass{article}
+\usepackage{bbm} %problema con el paquete bbm
+\begin{document}
+\( f: \mathbbm{R} \setminus \{0\} \to \mathbbm{R}\)defined as \\
+\(f(x) = \frac{sin{x}}{x} \)\\
+
+\( f: \mathbbm{R} \to \mathbbm{R}\)defined as \\
+\(f(x)) =
+\left\{
+\begin{array}{11}
+x & \mbox{if } x \geq 0 \\
+-x & \mbox{if } x < 0
+\end{array}
+\right. \)
+\end{document}
+```
+
+<br>
+<br>
+
+## Ángulos y grados
+
+```latex
+\documentclass{article}
+\usepackage{gensymb}
+\begin{document}
+\[90\degree\]
+\end{document}
+```
+![](//imagenes_latex/eje61a.png)
+
+<br>
+<br>
+
+## Valor absoluto y norma, paquete `commath`
+
+
+```latex
+\documentclass{article}
+\usepackage{commath}
+\begin{document}
+\[\abs{x}\]
+\[\norm{x}\]
+\[\abs{\frac{x}{\abs{y}}}\]
+\end{document}
+```
+
+![](/imagenes_latex/eje61b.png)
+
+
+## Acentos gráficos
+
+```latex
+\documentclass{article}
+\begin{document}
+\[\bar{a}\]
+\[\vec{a}\]
+\[\hat{a}\]
+\[\tilde{a}\]
+\[\dot{a}\]
+\[\ddot{a}\]
+\[\check{a}\]
+\[\acute{a}\]
+\[\breve{a}\]
+\end{document}
+```
+<center>
+![](/imagenes_latex/eje63.png)
+
+</center>
+<br>
+
+## Puntos, líneas ...
+
+
+```latex
+\documentclass{article}
+\begin{document}
+\[a + b + c + \cdots \]
+\[a_0, a_1, a_2 \ldots \]
+\[\overline{abc}\]
+\[\underline{abc}\]
+\[\overrightarrow{abc}\]
+\[\overleftarrow{abc}\]
+\[\widetilde{abc}\]
+\[\widehat{abc}\]
+\[\overbrace{abc}\]
+\[\underbrace{abc}\]
+\end{document}
+```
+
+<center>
+![](/imagenes_latex/eje64.png)
+</center>
+<br>
+<br>
+
+## Sumatorias
+
+
+```latex
+\documentclass{article}
+\begin{document}
+\[\sum\]
+\[\sum a + b + \cdots\]
+\[\sum_{n=1}^{n=3}n\]
+\[\sum\limits_{n=1}^{n=3}n\]
+\end{document}
+```
+<center>
+![](/imagenes_latex/eje65.png)
+</center>
+
+
+## Coeficientes binomiales
+
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\[\binom{n}{r}\]
+\[^nC_r\]
+\[^nP_r\]
+\end{document}
+```
+<center>
+![](/imagenes_latex/eje66.png)
+</center>
+
+
+## Límites y derivadas
+
+```latex
+\documentclass{article}
+\begin{document}
+
+%limites
+\(lim_{n \to \infty}n\) \\
+
+
+\(\lim\llimits_{n \to \infty}n\)
+
+%derivadas
+\[\frac{dy}{dx}\]
+\[\frac{d^2}{dx^2}\]
+\[{\partial z}{\partial x}\]
+\[\frac{\partial^2 z}{\partial x^2}\]
+\[\frac{\partial^2 z}{\partial x \partial y}\]
+\end{document}
+```
+
+<center>
+![](/imagenes_latex/eje67.png)
+</center>
+
+
+## Integración
+
+`mathrm` para dar el formato apropiado al diferencial $d$.
+
+`\!` es usado para reducir el espacio entre el símbolo de integración y el integrando.
+
+`\limits` se utiliza para la colocación adecuada de límites en ecuaciones que van en una línea de texto.
+
+```latex
+\documentclass{article}
+\begin{document}
+\[\int, \oint\]
+\[\int f(x)\ ,dx\]
+\[\int \!f(x)\, dx\)\]
+\[\int_{0}^{2}x\ ,dx\]
+\[\int_{0}^{2}\!x\ ,dx\]
+\[\int\limits_{0}^{2}x\, dx\]
+\[\int_{0}^{2}\!x\, \mathrm{d}x\]
+
+\end{document}
+```
+<center>
+![](/imagenes_latex/ejeint.png)
+</center>
+
+## Integración doble
+
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\[\iint\] %integración doble
+\[\iiint\] %integración triple
+\[\iint xy\]
+\[\iint xy\, dx\, dy\]
+\[\iint_D f \]
+\[\iint\limits_D f\]
+\[\int_{a}^{b}\int_{c}^{d}\]
+\[\int\limits_{a}^{b}\int\limits_{c}^{d}\]
+\[\iint \!f(x\, dx\, dy\)\]
+\end{document}
+```
+
+<center>
+![](/imagenes_latex/eje68.png)
+</center>
+
+
+## Matrices y determinantes
+
+```latex
+\documentclass{article}
+\begin{document}
+\( A = \begin{array}{cc}
+x_{11} & x_{12}\\
+y_{21} & y_{22}\\
+z_{21} & z_{22}
+\end{array}\)
+\end{document}
+```
+
+![](/imagenes_latex/eje68a.png)
+<br>
+<br>
+
+```latex
+\documentclass{article}
+\begin{document}
+\( A = \left(\begin{array}{cc}
+x_{11} & x_{12}\\
+y_{21} & y_{22}\\
+z_{21} & z_{22}
+\end{array}\right)\)
+\end{document}
+```
+![](/imagenes_latex/eje68b.png)
+
+<br>
+<br>
+
+```latex
+\documentclass{article}
+\begin{document}
+\( A = \left[\begin{array}{cc}
+x_{11} & x_{12}\\
+y_{21} & y_{22}\\
+z_{21} & z_{22}
+\end{array}\right]\)
+\end{document}
+```
+![](/imagenes_latex/eje68c.png)
+
+<br>
+<br>
+
+## Matriz con el paquete `amsmath`
+
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\( A = \begin{matrix}
+x_{11} & x_{12}\\
+y_{21} & y_{22}\\
+z_{21} & z_{22}
+\end{matrix}\)
+\end{document}
+```
+
+![](/imagenes_latex/eje68d.png)
+<br>
+<br>
+
+## Matrices `amsmath`
+
+```latex
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\( A = \begin{matrix}
+x_{11} & x_{12}\\
+y_{21} & y_{22}\\
+z_{21} & z_{22}
+\end{matrix}\)\\
+
+\( A = \begin{pmatrix}
+x_{11} & x_{12}\\
+y_{21} & y_{22}\\
+z_{21} & z_{22}
+\end{pmatrix}\)\\
+
+\( A = \begin{bmatrix}
+x_{11} & x_{12}\\
+y_{21} & y_{22}\\
+z_{21} & z_{22}
+\end{bmatrix}\)\\
+
+\( A = \begin{vmatrix}
+x_{11} & x_{12}\\
+y_{21} & y_{22}\\
+z_{21} & z_{22}
+\end{vmatrix}\)\\
+
+\( A = \begin{Vmatrix}
+x_{11} & x_{12}\\
+y_{21} & y_{22}\\
+z_{21} & z_{22}
+\end{Vmatrix}\)\\
+
+\( A = \begin{Bmatrix}
+x_{11} & x_{12}\\
+y_{21} & y_{22}\\
+z_{21} & z_{22}
+\end{Bmatrix}\)\\
+\end{document}
+```
+
+![](/imagenes_latex/eje68e.png)
+<br>
+<br>
+
+# Definir comandos personales
+
+Se pueden definir expresiones de uso personal para usarlas de manera predeterminada en el documento, a las cuales se les atribuye un nombre personalizado para ajecutarlas cuando se requieran. Sus argumentos se pueden hacer variar asignando diferentes valores.
+
+El formato para definir un comando personalizado es el siguiente:
+
+<center>
+`\newcommand{nombre personalizado}[nro.de argumentos]{expresión}`
+</center>
+
+* `nombre personalizado`, nombre que llevará el nuevo comando y con el que se ejecutará cuando se requiera.
+
+* `nro. de argumentos`, es un número entero entre el 1 y el 9.
+
+* `#n` descrito en la expresión, es reemplazado por el enesímo argumento.
+
+```latex
+\documentclass{article}
+\begin{document}
+\newcommand{\xyz}{Mi comando personal xyz.}
+\xyz
+
+\newcommand{\polin}{a_0+a_1x+\cdots+a_nx^n}
+\[\polin\]
+
+\newcommand{\poline}[1]{a_0+a_1x+\cdots+a_#1x^#1}
+\[\poline{m}\]
+\[\poline{n}\]
+
+\newcommand{\polinv}[2]{a_0+a_1#1+\cdots+a_#2#1^#2}
+\[\polinv{x}{m}\]
+\[\polinv{y}{n}\]
+
+\newcommand{\polinevc}[3]{#1_0+#1_1#2+\cdots+#1_#3#2^#3}
+\[\polinevc{a}{x}{m}\]
+\[\polinevc{b}{y}{n}\]
+\[\polinevc{u}{v}{w}\]
+\end{document}
+```
+
+![](/imagenes_latex/eje69i.png)
+
+## Redefiniendo los comandos
+
+`\renewcommand{}[]{}`
+
+```latex
+\documentclass{article}
+\begin{document}
+\newcommand{\xyz}{Mi comando personal.}
+\xyz
+
+\renewcommand{\xyz}{Redefiniendo el comando personal xyz. :)}
+\xyz
+
+\renewcommand{\xyz}[2]{Redefiniendo comandos, agregando argumentos. #1 , #2}
+\xyz{u}{w}
+
+\end{document}
+```
+
+<center>
+![](/imagenes_latex/eje69.png)
+<br>
+
+</center>
+<br>
+
+# Ejemplos algunos documentos
+
+
+## Carta sencilla
+
+```latex
+\documentclass{letter}
+\signature{Tu nombre}
+\address{Dirección \\Municipio - Departamento \\ País}
+\begin{document}
+\begin{letter}{Para: \\ Empresa \\ Dirección \\ Municipio - Departamento}
+\date{Enero 21, 2014}
+\opening{Estimado Señor\textbackslash Señora,}
+El contenido de la presente, se hace con el propósito de establecer...\\
+
+...No obstante este puede ser modificado con fines personales.
+\closing{Atentamente,}
+\ps{P.S espacio para posdata}
+\encl{Documentos adjuntos}
+\end{letter}
+\end{document}
+```
+
+
+<center>
+![](/imagenes_latex/eje70.png)
+</center>
+
+<br>
+<br>
+Se puede hacer uso del paquete `fancyhdr` para editar encabezados y pié de página. Se debe usar `thispagestyle{fancy}` para incluirlos en la página que se requiera.
+
+## Artículo científico
+
+El siguiente código crea una plantilla para un artículo científico.
+
+```latex
+\documentclass[letterpaper]{article}
+\usepackage{geometry, url, graphicx}
+\title{Artículo científico}
+\author{CRG}
+\date{31-12-2000}
+\begin{document}
+\maketitle
+\abstract{Resumen}
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\section{Introducción}
+Este es el espacio para escribir la introducción.
+\section{Antecedentes y preliminares}
+\section{Primer tema}
+Una primera sección...
+\subsection{Subsección de tema 1}
+\subsection{Subsección de tema 1}
+\section{Segundo tema}
+\subsection{Subsección tema 2}
+\subsection{Subsección tema 2}
+\subsubsection{Una sección de la sección aterior}
+\section{Conclusiones}
+* Conclusión ...
+
+* Conclusión ...
+\newpage
+\begin{thebibliography}{99}
+\bibitem{Ref1} Author1., \textit{Book 1}, Publisher 1, Year 1.
+\bibitem{Ref2} Author2., \textit{Book 2}, Publisher 2, Year2.
+\end{thebibliography}
+\end{document}
+```
+
+## Libro
+
+Plantilla para crear libro.
+
+Jerarquía del contenido de un libro en LaTeX:
+
+* Part
+
+* Chapter
+
+* Section
+
+* Subsection
+
+* Subsubsection
+
+```latex
+\documentclass{book}
+\begin{document}
+\part{First Part}
+\chapter*{Preface} % * salta el número del capítulo
+\chapter{First main chapter}
+\section{A section}
+\section{Another section}
+\subsection{A sub-section}
+\subsubsection[Deeper level]{A sub-section at deeper level}
+\chapter{Second main chapter}
+\part{Second part}
+\chapter{Third main chapter}
+\chapter{Fourth main chapter}
+\end{document}
+
+\chapter{}
+```
+
+## Crear la página del  título.
+
+```latex
+\documentclass{book}
+\begin{document}
+\begin{titlepage}
+\noindent{\Huge Nombre del libro \\ \\ }
+{\large edición \\ \\ \\}
+{\Large Autor\\}
+\vfill
+{\itshape año, Editorial}
+\end{titlepage}
+\end{document}
+```
+![](/imagenes_latex/eje71.png)
+<br>
+<br>
+
+## Tabla de contenido (toc)
+
+```latex
+\documentclass{book}
+%hyperref crea los marcadores y los vinculos de la toc
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\setcounter{tocdepth}{3} % detecta niveles en la toc
+\begin{document}
+\tableofcontents
+\part{First Part}
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface} %agrega titulo a la toc sin enumerar
+\chapter{First main chapter}
+\section{A section}
+\section{Another section}
+\subsection{A sub section}
+\subsubsection[Deeper level]{A subsection at deeper level}
+\chapter{Second main chapter}
+\part{Second part}
+\chapter{Third main chapter}
+\chapter{Fourth main chapter}
+\addtocontents{toc}{Some Description} %agrega a la toc sin nro de página.
+\section{A section in IV chapter}
+\end{document}
+```
+
+![](/imagenes_latex/eje72.png)
+
+<br>
+<br>
+
+## Lista de figuras (lof)
+
+La inclusión de una lista de figuras (lof) se hace de manera similar a la tabla de contenido (toc). Genera vínculos interacttivos para las imágenes.
+
+
+
+```latex
+\documentclass{book}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\begin{document}
+\tableofcontents
+\listoffigures % para incluir lista de figuras (lof)
+\part{First Part}
+\chapter*{Preface}
+\chapter{First main chapter}
+\section{A section}
+\addtocontents{lof}{descripción antes de la figura}%agregar manualmente en (lof) sin número de página
+\begin{figure}[htbp]
+\begin{center}
+\fbox{\includegraphics[width=4cm, angle=0]{/imagenes_latex/snowm.jpg}}
+\caption{Blancos picos.}
+\end{center}
+\end{figure}
+\addcontentsline{lof}{figure}{descripción después de la figura}%agregar entrada en lof
+\section{Another section}
+\addtocontents{lof}{descripción antes de la figura}
+\begin{figure}[htbp]
+\begin{center}
+\fbox{\includegraphics[width=4cm, angle=45]{/imagenes_latex/snowm.jpg}}
+\caption{Blancos picos inc.}
+\end{center}
+\end{figure}
+\addcontentsline{lof}{figure}{descripción después de la figura}
+\subsection{A sub section}
+\subsubsection[Deeper level]{A subsection at deeper level}
+\chapter{Second main chapter}
+\part{Second part}
+\chapter{Third main chapter}
+\chapter{Fourth main chapter}
+\section{A section in IV chapter}
+\end{document}
+```
+![](/imagenes_latex/eje73.png)
+
+<br>
+<br>
+
+## Incluir lista de tablas (lot)
+
+```latex
+\documentclass{book}
+\begin{document}
+\listoftables
+\part{First Part}
+\chapter*{Preface}
+\chapter{First main chapter}
+\section{A section}
+\addtocontents{lot}{some description before table}
+\begin{table}[htbp]
+\begin{tabular}{ccc}
+\hline
+\textbf{Col. 1} & \textbf{Col. 2} & \textbf{Col. 3} \\
+\hline
+11 & 12 & 13 \\
+\hline
+21 & 22 & 23 \\
+\hline
+31 & 32 & 33 \\
+\hline
+\end{tabular}
+\centering
+\caption{Nombre tabla}
+\end{table}
+\addcontentsline{lot}{table}{description after table}
+\section{Another section}
+\subsection{A smaller section}
+\subsubsection[Deeper level]{This section has an even deeper level}
+\chapter{Third main chapter}
+\end{document}
+```
+
+![](/imagenes_latex/eje74.png)
+
+<br>
+<br>
+
+
+## Índice
+
+Verificar este script, no genera el resultado esperado.
+
+```latex
+\documentclass{book}
+\usepackage{index}
+\makeindex
+\begin{document}
+\part{First Part}
+\chapter*{Preface}
+\chapter{First main chapter}
+\section{A section}
+\index{index entry A}
+\section{Another section}
+\subsection{A smaller section}
+\chapter{Second main chapter}
+\part{Second part}
+\index{index entry B}
+\chapter{Third main chapter}
+\index{index entry C}
+\index{index entry A}
+\index{index entry D |see{index entry C}}
+\printindex
+\end{document}
+```
+*******
+
+```latex
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\makeindex
+
+\begin{document}
+
+\section{Introduction}
+In this example several keywords\index{keywords} will be used
+which are important and deserve to appear in the Index\index{Index}.
+
+\newpage
+Terms like generate\index{generate} and some\index{others} will
+also show up.
+
+\printindex
+
+\end{document}
+```
+
+![](/imagenes_latex/eje75.png)
+********
+
+```latex
+\documentclass{article}
+\usepackage{imakeidx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\makeindex
+
+\begin{document}
+
+\section{Introduction}
+In this example several keywords\index{keywords} will be used
+which are important and deserve to appear in the Index\index{Index}.
+
+Terms like generate\index{generate} and some\index{others} will also
+show up. Terms in the index can also be nested \index{Index!nested}
+
+\clearpage
+
+\section{Second section}
+This second section\index{section} may include some special word,
+and expand the ones already used\index{keywords!used}.
+
+\printindex
+\end{document}
+
+```
+![](/imagenes_latex/eje76.png)
+
+********
+
+
+```latex
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\makeindex[columns=3, title=Alphabetical Index]
+
+\begin{document}
+
+\section{Introduction}
+In this example several keywords\index{keywords} will be used which
+are important and deserve to appear in the Index\index{Index}.
+
+Terms like generate\index{generate} and some\index{others} will also
+show up. Terms in the index can also be nested \index{Index!nested}
+
+\clearpage
+
+\section{Second section}
+This second section\index{section} may include some special word,
+and expand the ones already used\index{keywords!used}.
+
+\printindex
+\end{document}
+```
+
+![](/imagenes_latex/eje78.png)
+********
+
+
+## Introducir el índice a la tabla de contenido
+
+```latex
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\makeindex[columns=3, title=Alphabetical Index, intoc]
+
+\begin{document}
+
+\tableofcontents
+
+\section{Introduction}
+In this example several keywords\index{keywords} will be
+used which are important and deserve to appear in the
+Index\index{Index}.
+
+Terms like generate\index{generate} and some\index{others}
+will also show up. Terms in the index can also be
+nested \index{Index!nested}
+
+\clearpage
+
+\section{Second section}
+This second section\index{section} may include some special
+word, and expand the ones already used\index{keywords!used}.
+
+\printindex
+\end{document}
+```
+
+![](/imagenes_latex/eje79.png)
+
+# Incluyendo bibliografía
+
+```latex
+\documentclass{book}
+\begin{document}
+\end{document}
+\part{First Part}
+\chapter*{Preface}
+\chapter{First main chapter}
+\section{A section}
+\subsection{A smaller section}
+Se puede hacer referencia a la cita \cite{Ref1} y también a una cita \cite{Ref2}.
+\chapter{Second main chapter}
+\part{Second part}
+\chapter{Third main chapter}
+\begin{thebibliography}{99}
+\bibitem{Ref1} Author1., \textit{Book 1}, Publisher 1, Year 1.
+\bibitem{Ref2} Author2., \textit{Book 2}, Publisher 2, Year 2.
+\end{thebibliography}
+\end{document}
+
+```
+
+![](/imagenes_latex/eje80.png)
+
+# Apéndice
+
+Un capítulo que está después del comando `\appendix` es incluido en el apéndice.
+
+`\cleardoublepage` agrega una nueva página, que estará vacía si la página nueva tiene un número impar.
+
+`\bigskip`, adiciona espacio vertical en la tabla de contenido.
+
+```latex
+\documentclass{book}
+\begin{document}
+\tableofcontents
+\part{First Part}
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\chapter{First main chapter}
+\section{A section}
+\section{Another section}
+\subsection{A smaller section}
+\chapter{Second main chapter}
+\part{Second Part}
+\chapter{Third main chapter}
+\appendix
+\cleardoublepage
+\addcontents{toc}{\bigskip}
+\addcontentsline{toc}{part}{Appendix}
+\chapter{Glossary}
+\chapter{Symbols}
+\end{document}
+
+```
+
+![](/imagenes_latex/eje81.png)
+
+# Referencias
+
+* Sagan C., 1994, _Un punto azul pálido_. Random House Publishing group, Estados Unidos.
+
+* [LaTeX](https://www.latex-project.org/)
+
+* [App LaTeX tutorials](https://play.google.com/store/apps/details?id=com.unimaths.latex&hl=es_CO)
+
+* [Free software](https://www.gnu.org/philosophy/free-sw.es.html)
+
+* [Distributions](https://www.latex-project.org/get/#tex-distributions)
+
+* [lyx](https://www.lyx.org/)
+
+* [Texmaker](https://www.xm1math.net/texmaker/)
+
+* [texstudio](https://www.texstudio.org/)
+
+* [RStudio](https://rstudio.com/)
+
+* [PdfTex](https://en.wikipedia.org/wiki/PdfTeX)
+
+* [XeTeX](https://en.wikipedia.org/wiki/XeTeX)
+
+* [Tabbing](http://joshua.smcvt.edu/latex2e/tabbing.html)
+
+* [Wikibooks](https://en.wikibooks.org/wiki/LaTeX/Mathematics)
